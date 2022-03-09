@@ -40,7 +40,7 @@ namespace xprim_geom::capsule
                 ( vertex
                 {	.m_Position{ p + float3(0.0f, 0.5f * Height - Radius, 0.0f) }
                 ,	.m_Normal  { p.Normalize() }
-                ,	.m_Tangent { z, 0.0f, x, 1.0f }
+                ,	.m_Tangent { -z, -0.0f, -x, 1.0f }
                 ,	.m_Texcoord{ u, v * onethird_v }
                 });
 
@@ -87,7 +87,7 @@ namespace xprim_geom::capsule
                 ( vertex
                 { .m_Position = p
                 , .m_Normal   = { x, 0.0f, -z }
-                , .m_Tangent  = { z, 0.0f,  x, 1.0f }
+                , .m_Tangent  = { -z, -0.0f, -x, 1.0f }
                 , .m_Texcoord = { u, onethird_v + (v * onethird_v) }
                 });
 
@@ -135,7 +135,7 @@ namespace xprim_geom::capsule
                 ( vertex
                 { .m_Position = p + float3( 0.0f, -0.5f * Height + Radius, 0.0f )
                 , .m_Normal   = p.Normalize()
-                , .m_Tangent  = { z, 0.0f, x, 1.0f }
+                , .m_Tangent  = { -z, -0.0f, -x, 1.0f }
                 , .m_Texcoord = { u2, twothirds_v + (v - 1.0f) * onethird_v }
                 });
 
