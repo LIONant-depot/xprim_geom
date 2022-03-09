@@ -4,9 +4,6 @@ namespace xprim_geom::cube
     inline
     mesh Generate( const int SubdivideX, const int SubdivideY, const int SubdivideZ, const int SubdivideW, const float3 Size ) noexcept
     {
-        constexpr float onethird_v  = 1.0f / 3.0f;
-        constexpr float twothirds_v = 2.0f / 3.0f;
-
         mesh Mesh;
 
         //
@@ -23,8 +20,8 @@ namespace xprim_geom::cube
             float x = StartPos.m_X;
             for( int i = 0, end_i = SubdivideW + 1; i <= end_i; i++) 
             {
-                const float u = i / (3.0f * (SubdivideW + 1.0f));
-                const float v = j / (2.0f * (SubdivideY + 1.0f));
+                const float u = i / (SubdivideW + 1.0f);
+                const float v = j / (SubdivideY + 1.0f);
 
                 // front
                 Mesh.m_Vertices.push_back
@@ -42,7 +39,7 @@ namespace xprim_geom::cube
                 { .m_Position = { x, -y, StartPos.m_Z }
                 , .m_Normal   = { 0.0f, 0.0f, -1.0f }
                 , .m_Tangent  = { -1.0f, 0.0f, 0.0f, 1.0f }
-                , .m_Texcoord = { twothirds_v + u, v }
+                , .m_Texcoord = { 1-u, v }
                 });
                 Point++;
 
@@ -86,8 +83,8 @@ namespace xprim_geom::cube
             float z = StartPos.m_Z;
             for( int i = 0; i <= (SubdivideZ + 1); i++) 
             {
-                const float u = i/(3.0f * (SubdivideZ + 1.0f));
-                const float v = j/(2.0f * (SubdivideY + 1.0f));
+                const float u = i/( SubdivideZ + 1.0f);
+                const float v = j/( SubdivideY + 1.0f);
 
                 // right
                 Mesh.m_Vertices.push_back
@@ -95,7 +92,7 @@ namespace xprim_geom::cube
                 { .m_Position = { -StartPos.m_X, -y, -z }
                 , .m_Normal   = { 1.0f, 0.0f, 0.0f }
                 , .m_Tangent  = { 0.0f, 0.0f, -1.0f, 1.0f }
-                , .m_Texcoord = { onethird_v + u, v }
+                , .m_Texcoord = { u, v }
                 });
                 Point++;
 
@@ -105,7 +102,7 @@ namespace xprim_geom::cube
                 { .m_Position = { StartPos.m_X, -y, -z }
                 , .m_Normal   = { -1.0f, 0.0f, 0.0f }
                 , .m_Tangent  = { 0.0f, 0.0f, 1.0f, 1.0f }
-                , .m_Texcoord = { u, 0.5f + v }
+                , .m_Texcoord = { 1-u, v }
                 });
                 Point++;
 
@@ -147,16 +144,16 @@ namespace xprim_geom::cube
             float x = StartPos.m_X;
             for( int i = 0, end_i = SubdivideW + 1; i <= end_i; ++i ) 
             {
-                const float u = i / (3.0f * (SubdivideW + 1.0f));
-                const float v = j / (2.0f * (SubdivideZ + 1.0f));
+                const float u = i / (SubdivideW + 1.0f);
+                const float v = j / (SubdivideZ + 1.0f);
 
                 // top
                 Mesh.m_Vertices.push_back
                 ( vertex
                 { .m_Position = { -x, -StartPos.m_Y, -z }
                 , .m_Normal   = { 0.0f, 1.0f, 0.0f }
-                , .m_Tangent  = { -1.0f, 0.0f, 0.0f, 1.0f }
-                , .m_Texcoord = { onethird_v + u, 0.5f + v }
+                , .m_Tangent  = { 1.0f, 0.0f, 0.0f, 1.0f }
+                , .m_Texcoord = { 1 - u, 1 - v }
                 });
                 Point++;
 
@@ -166,7 +163,7 @@ namespace xprim_geom::cube
                 { .m_Position = { x, StartPos.m_Y, -z }
                 , .m_Normal   = { 0.0f, -1.0f, 0.0f }
                 , .m_Tangent  = { 1.0f, 0.0f, 0.0f, 1.0f }
-                , .m_Texcoord = { twothirds_v + u, 0.5f + v }
+                , .m_Texcoord = { u, v }
                 });
                 Point++;
 
