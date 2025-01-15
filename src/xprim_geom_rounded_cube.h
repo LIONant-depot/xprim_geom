@@ -102,7 +102,7 @@ namespace xprim_geom::rounded_cube
         int        tZ   = 0, tX = 0, v = 0;
 
 
-        constexpr auto SetQuad = [&](std::span<int> Span, int i, int v00, int v10, int v01, int v11) -> int
+        const auto SetQuad = [&](std::span<int> Span, int i, int v00, int v10, int v01, int v11) -> int
         {
             assert( v00 < Mesh.m_Vertices.size() );
             assert(v10 < Mesh.m_Vertices.size());
