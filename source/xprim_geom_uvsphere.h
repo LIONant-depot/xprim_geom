@@ -10,6 +10,7 @@ namespace xprim_geom::uvsphere
         int         thisrow = 0;
         int         prevrow = 0;
         int         Point   = 0;
+        const auto  Normal  = []( float X, float Y, float Z ) noexcept { const float L = std::sqrt( X * X + Y * Y + Z * Z ); return float3{ X / L, Y / L, Z / L }; };
 
         for( int j = 0, end_j = Rings + 1; j <= end_j; ++j ) 
         {
@@ -26,7 +27,7 @@ namespace xprim_geom::uvsphere
                 Mesh.m_Vertices.push_back
                 ( vertex
                 { .m_Position = {x * Radius * w, y, z * Radius * w}
-                , .m_Normal   = { x * Radius * w * Scale, y / Scale, z * Radius * w * Scale }
+                , .m_Normal   = Normal( x * w / Radius, std::cosf( pi_v * v ) / Scale, z * w / Radius )     // the ellipsoid's gradient (P / axis^2), unit
                 , .m_Tangent  = { z, 0.0f, -x, 1.0f }
                 , .m_Texcoord = { u, v }
                 });
